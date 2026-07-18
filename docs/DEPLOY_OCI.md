@@ -43,6 +43,14 @@ docker run -d --restart unless-stopped -p 8501:8501 \
 Abre `http://<IP_PUBLICA>:8501` → captura de pantalla para el entregable.
 
 ### Evidencia (checklist entregable)
-- [ ] URL pública funcionando: `http://<IP_PUBLICA>:8501`
-- [ ] Captura de la app respondiendo una pregunta
-- [ ] `docker ps` mostrando el contenedor `Up`
+- [x] URL pública funcionando: [http://163.192.130.222:8501](http://163.192.130.222:8501)
+- [x] Captura de la app respondiendo una pregunta
+
+  ![App respondiendo](screenshots/IA_Respondiendo.png)
+
+- [x] `docker ps` mostrando el contenedor `Up`
+
+  ```
+  CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS                    PORTS                                         NAMES
+  561fd4daf22c   agente-fiscal   "streamlit run main.…"   18 minutes ago   Up 18 minutes (healthy)   0.0.0.0:8501->8501/tcp, [::]:8501->8501/tcp   agente
+  ```

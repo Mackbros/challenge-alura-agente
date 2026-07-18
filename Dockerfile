@@ -2,10 +2,12 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+RUN apt-get update -qq && apt-get install -y -qq curl
+
 COPY requirements.txt .
-RUN apt-get update -qq && apt-get install -y -qq curl && \
-    pip install --no-cache-dir -r requirements.txt && \
-    python3 -c "import site; p=site.getsitepackages()[0]+'/faiss/loader.py'; s=open(p).read(); s=s.replace('def is_sve_supported():','def is_sve_supported():\n        return False'); open(p,'w').write(s)"
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN python3 -c "import site; p=site.getsitepackages()[0]+'/faiss/loader.py'; s=open(p).read(); s=s.replace('def is_sve_supported():','def is_sve_supported():\n        return False'); open(p,'w').write(s)"
 
 COPY app/ ./app/
 COPY data/ ./data/

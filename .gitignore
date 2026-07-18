@@ -5,3 +5,6 @@ __pycache__/
 venv/
 data/faiss_index/
 streamlit.log
+.ssh_deploy/
+OCI/
+.OCI/
