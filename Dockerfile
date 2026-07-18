@@ -3,9 +3,10 @@ FROM python:3.11-slim
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt && \
-    sed -i 's/def is_sve_supported():/def is_sve_supported():\n    return False/' \
-        /usr/local/lib/python3.12/site-packages/faiss/loader.py
+RUN apt-get update -qq && apt-get install -y -qq curl && \
+    pip install --no-cache-dir -r requirements.txt && \
+    find /usr/local -name loader.py -path "*/faiss/*" -exec \
+        sed -i 's/def is_sve_supported():/def is_sve_supported():\n    return False/' {} \;
 
 COPY app/ ./app/
 COPY data/ ./data/
