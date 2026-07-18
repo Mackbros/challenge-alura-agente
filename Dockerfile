@@ -5,8 +5,17 @@ WORKDIR /app
 COPY requirements.txt .
 RUN apt-get update -qq && apt-get install -y -qq curl && \
     pip install --no-cache-dir -r requirements.txt && \
-    find /usr/local -name loader.py -path "*/faiss/*" -exec \
-        sed -i 's/def is_sve_supported():/def is_sve_supported():\n    return False/' {} \;
+    python3 -c "
+path = __import__('site').getsitepackages()[0] + '/faiss/loader.py'
+with open(path) as f:
+    src = f.read()
+src = src.replace(
+    'def is_sve_supported():',
+    'def is_sve_supported():\n        return False'
+)
+with open(path, 'w') as f:
+    f.write(src)
+"
 
 COPY app/ ./app/
 COPY data/ ./data/
