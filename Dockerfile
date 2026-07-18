@@ -1,9 +1,11 @@
-FROM python:3.12-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && \
+    sed -i 's/def is_sve_supported():/def is_sve_supported():\n    return False/' \
+        /usr/local/lib/python3.12/site-packages/faiss/loader.py
 
 COPY app/ ./app/
 COPY data/ ./data/
