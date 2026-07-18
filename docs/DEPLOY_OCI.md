@@ -35,7 +35,7 @@ git clone <tu-repo> && cd challenge-alura-agente
 # sube tu PDF a data/guia_fiscal_sat.pdf (scp o git)
 docker build -t agente-fiscal .
 docker run -d --restart unless-stopped -p 8501:8501 \
-  -e OPENAI_API_KEY=sk-... --name agente agente-fiscal
+  -e GROQ_API_KEY=gsk_... --name agente agente-fiscal
 ```
 
 ## 5. Verificar

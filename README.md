@@ -16,7 +16,7 @@ respuesta no está en el documento, lo dice — no inventa.
 ┌──────────────┐     ┌──────────────────┐     ┌─────────────────┐
 │  PDF fiscal  │ ──▶ │  Splitter +      │ ──▶ │  FAISS index    │
 │  (data/)     │     │  Embeddings      │     │  (vector store) │
-└──────────────┘     │  text-embed-3-sm │     └────────┬────────┘
+└──────────────┘     │  MiniLM-L6-v2    │     └────────┬────────┘
                      └──────────────────┘              │
                                                        ▼
 ┌──────────────┐     ┌──────────────────┐     ┌─────────────────┐
@@ -25,25 +25,26 @@ respuesta no está en el documento, lo dice — no inventa.
 └──────────────┘     └──────────────────┘              │
         ▲                                               ▼
         │            ┌──────────────────┐     ┌─────────────────┐
-        └─────────── │  Respuesta +     │ ◀── │  gpt-4o-mini    │
-                     │  páginas fuente  │     │  (LLM)          │
+        └─────────── │  Respuesta +     │ ◀── │  Llama 3.1 8B   │
+                     │  páginas fuente  │     │  (Groq, LLM)    │
                      └──────────────────┘     └─────────────────┘
 ```
 
-Flujo RAG: `PyPDFLoader` → `RecursiveCharacterTextSplitter` → `OpenAIEmbeddings` → `FAISS`
-→ `ConversationalRetrievalChain` (recupera k=4 chunks) → `gpt-4o-mini` → respuesta con fuentes.
+Flujo RAG: `PyPDFLoader` → `RecursiveCharacterTextSplitter` → `HuggingFaceEmbeddings`
+(local, sin costo) → `FAISS` → `ConversationalRetrievalChain` (recupera k=4 chunks) →
+`ChatGroq` (Llama 3.1 8B, gratis) → respuesta con fuentes.
 
 ## Tecnologías
 
-| Componente     | Herramienta                          |
-|----------------|--------------------------------------|
-| UI             | Streamlit                            |
-| Orquestación   | LangChain                            |
-| LLM            | OpenAI `gpt-4o-mini`                 |
-| Embeddings     | OpenAI `text-embedding-3-small`     |
-| Vector store   | FAISS (local)                        |
-| Lectura PDF    | pypdf                                |
-| Deploy         | Docker sobre Oracle Cloud (OCI)      |
+| Componente     | Herramienta                                  |
+|----------------|-----------------------------------------------|
+| UI             | Streamlit                                    |
+| Orquestación   | LangChain                                    |
+| LLM            | Groq — `llama-3.1-8b-instant` (gratis)       |
+| Embeddings     | HuggingFace `all-MiniLM-L6-v2` (local, gratis)|
+| Vector store   | FAISS (local)                                |
+| Lectura PDF    | pypdf                                         |
+| Deploy         | Docker sobre Oracle Cloud (OCI)              |
 
 ## Cómo ejecutar (local)
 
@@ -54,7 +55,7 @@ cd challenge-alura-agente
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-cp .env.example .env          # pon tu OPENAI_API_KEY
+cp .env.example .env          # pon tu GROQ_API_KEY (gratis en console.groq.com)
 # coloca tu PDF en data/guia_fiscal_sat.pdf
 
 streamlit run app/main.py
@@ -62,11 +63,14 @@ streamlit run app/main.py
 
 Abre http://localhost:8501
 
+> **Obtener API key gratis:** crea cuenta en [console.groq.com](https://console.groq.com/keys),
+> genera una key (`gsk_...`), sin tarjeta de crédito.
+
 ### Con Docker
 
 ```bash
 docker build -t agente-fiscal .
-docker run -p 8501:8501 -e OPENAI_API_KEY=sk-... agente-fiscal
+docker run -p 8501:8501 -e GROQ_API_KEY=gsk_... agente-fiscal
 ```
 
 ## Ejemplos de preguntas

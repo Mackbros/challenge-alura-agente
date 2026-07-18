@@ -18,8 +18,8 @@ st.set_page_config(page_title="Agente Fiscal SAT", page_icon="🧾")
 st.title("🧾 Agente Fiscal SAT")
 st.caption("Agente RAG que responde dudas fiscales desde un PDF. Challenge Alura Agente.")
 
-if not os.getenv("OPENAI_API_KEY"):
-    st.error("Falta OPENAI_API_KEY. Configúrala en .env o variable de entorno.")
+if not os.getenv("GROQ_API_KEY"):
+    st.error("Falta GROQ_API_KEY. Configúrala en .env o variable de entorno.")
     st.stop()
 
 
