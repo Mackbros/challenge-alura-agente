@@ -1,8 +1,24 @@
-# 🧾 Agente Fiscal SAT — Challenge Alura Agente
+<div align="center">
+
+# 🧾 Agente Fiscal SAT
+
+**Agente RAG que responde dudas fiscales del SAT México a partir de un PDF**
+
+[![Demo en vivo](https://img.shields.io/badge/demo-en%20vivo-brightgreen)](http://163.192.130.222:8501)
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-UI-FF4B4B?logo=streamlit&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-RAG-1C3C3C)
+![Groq](https://img.shields.io/badge/Groq-Llama%203.1-orange)
+![Docker](https://img.shields.io/badge/Docker-deploy-2496ED?logo=docker&logoColor=white)
+
+*Proyecto del Challenge Alura Agente — ONE / Alura LATAM*
+
+![Demo del Agente Fiscal SAT respondiendo una pregunta](docs/screenshots/IA_Respondiendo.png)
+
+</div>
 
 Agente de IA que responde preguntas fiscales (SAT México) basándose en el contenido de un
-documento PDF, usando **RAG** (Retrieval-Augmented Generation). Proyecto del *Challenge Alura
-Agente* — ONE / Alura LATAM.
+documento PDF, usando **RAG** (Retrieval-Augmented Generation).
 
 ## Descripción general
 
@@ -92,6 +108,6 @@ docker run -p 8501:8501 -e GROQ_API_KEY=gsk_... agente-fiscal
 
 ## Despliegue en OCI
 
-Ver [docs/DEPLOY_OCI.md](docs/DEPLOY_OCI.md).
+Ver [docs/DEPLOY_OCI.md](docs/DEPLOY_OCI.md) para la guía de despliegue y evidencia completa.
 
 **App en vivo:** [http://163.192.130.222:8501](http://163.192.130.222:8501)
