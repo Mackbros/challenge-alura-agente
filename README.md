@@ -94,4 +94,4 @@ docker run -p 8501:8501 -e GROQ_API_KEY=gsk_... agente-fiscal
 
 Ver [docs/DEPLOY_OCI.md](docs/DEPLOY_OCI.md).
 
-**App en vivo:** _<pega aquí la URL pública tras el deploy>_
+**App en vivo:** [http://163.192.130.222:8501](http://163.192.130.222:8501)
