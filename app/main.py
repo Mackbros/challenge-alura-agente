@@ -33,34 +33,35 @@ st.markdown(
     html, body, [class*="css"] { font-family: 'Manrope', sans-serif; }
 
     .stApp {
-        background: radial-gradient(circle at 15% 0%, #1b2840 0%, #0e1420 45%, #0a0e16 100%);
+        background: linear-gradient(180deg, #0c1a2b 0%, #0a1420 55%, #080f18 100%);
     }
 
     .hero {
-        background: linear-gradient(135deg, #4f7cff 0%, #7b5cff 55%, #b04fff 100%);
-        border-radius: 20px;
+        background: linear-gradient(120deg, #0f3a5f 0%, #124b78 60%, #0c2d4a 100%);
+        border: 1px solid rgba(212, 175, 55, 0.25);
+        border-radius: 14px;
         padding: 28px 32px;
         margin-bottom: 22px;
-        box-shadow: 0 10px 30px rgba(79, 124, 255, 0.25);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
     .hero h1 {
         color: #fff; font-size: 1.8rem; font-weight: 800; margin: 0 0 6px 0;
     }
     .hero p {
-        color: rgba(255,255,255,0.9); font-size: 0.95rem; margin: 0;
+        color: rgba(255,255,255,0.85); font-size: 0.95rem; margin: 0;
     }
 
     .chip-label {
-        color: #9aa7c7; font-weight: 600; font-size: 0.85rem;
+        color: #7f93ab; font-weight: 600; font-size: 0.85rem;
         text-transform: uppercase; letter-spacing: 0.04em;
         margin: 4px 0 10px 2px;
     }
 
     div[data-testid="stButton"] > button {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 14px;
-        color: #e8ecf7;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 10px;
+        color: #dbe4ee;
         padding: 10px 14px;
         font-weight: 600;
         font-size: 0.85rem;
@@ -69,9 +70,9 @@ st.markdown(
         width: 100%;
     }
     div[data-testid="stButton"] > button:hover {
-        background: linear-gradient(135deg, rgba(79,124,255,0.35), rgba(176,79,255,0.35));
-        border-color: rgba(176,79,255,0.5);
-        color: #fff;
+        background: rgba(212, 175, 55, 0.10);
+        border-color: rgba(212, 175, 55, 0.55);
+        color: #f2d98b;
         transform: translateY(-1px);
     }
 
