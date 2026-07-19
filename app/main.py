@@ -125,16 +125,15 @@ if "history" not in st.session_state:
 if "pending_question" not in st.session_state:
     st.session_state.pending_question = None
 
-if not st.session_state.history:
-    st.markdown('<div class="chip-label">Preguntas frecuentes</div>', unsafe_allow_html=True)
-    cols = st.columns(2)
-    for i, q in enumerate(SUGGESTED_QUESTIONS):
-        if cols[i % 2].button(q, key=f"chip_{i}"):
-            st.session_state.pending_question = q
-
 for q, a in st.session_state.history:
     st.chat_message("user").write(q)
     st.chat_message("assistant").write(a)
+
+st.markdown('<div class="chip-label">Preguntas frecuentes</div>', unsafe_allow_html=True)
+cols = st.columns(2)
+for i, q in enumerate(SUGGESTED_QUESTIONS):
+    if cols[i % 2].button(q, key=f"chip_{i}"):
+        st.session_state.pending_question = q
 
 pregunta = st.chat_input("Pregunta algo sobre el documento fiscal…")
 if not pregunta and st.session_state.pending_question:
