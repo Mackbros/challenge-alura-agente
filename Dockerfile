@@ -5,7 +5,8 @@ WORKDIR /app
 RUN apt-get update -qq && apt-get install -y -qq curl
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+    pip install --no-cache-dir -r requirements.txt
 
 RUN python3 -c "import site; p=site.getsitepackages()[0]+'/faiss/loader.py'; s=open(p).read(); s=s.replace('def is_sve_supported():','def is_sve_supported():\n        return False'); open(p,'w').write(s)"
 
